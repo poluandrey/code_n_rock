@@ -1,0 +1,26 @@
+services:
+  db:
+    image: postgres:13.3
+    container_name: inventory_db
+    environment:
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - ../pgdata:/var/lib/postgresql/data
+    env_file:
+      - .env
+  app:
+    container_name: inventory
+    env_file:
+      - .env
+    build: .
+    restart: always
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    entrypoint: ["sh", "/app/entrypoint.sh"]
+    volumes:
+      - ../log:/app/log
+      - .:/app
+      - ../static:/app/static
+      - ../media:/app/media

@@ -1,7 +1,7 @@
 from python:3.10-alpine
 
 RUN apk update \
-    && apk add postgresql-dev gcc python3-dev musl-dev
+    && apk add postgresql-dev gcc python3-dev musl-dev && apk add libffi-dev
 
 WORKDIR /app
 RUN mkdir log
@@ -11,6 +11,6 @@ ENV PYTHONUNBUFFERED 1
 
 COPY requirements.txt .
 RUN pip install --upgrade pip
-RUN pip install -r requirements.txt --no-cache-dir && ls
+RUN pip install -r requirements.txt --no-cache-dir
 
 COPY . .

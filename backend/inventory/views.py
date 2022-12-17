@@ -32,6 +32,7 @@ class FileUploadView(generics.ListCreateAPIView):
 
 fs = FileSystemStorage(location='tmp/')
 
+
 def upload_data(file):
 
     content = file.read()

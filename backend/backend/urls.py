@@ -36,6 +36,7 @@ urlpatterns += [
         name='schema-redoc'),
     path('inventory/', include('inventory.urls')),
     path('export_users_xls/', export_users_xls),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

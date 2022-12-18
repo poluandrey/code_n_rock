@@ -91,8 +91,8 @@ class ProductViewSet(viewsets.ModelViewSet):
     def run_model(self, request, file=None):
         if not file:
             for audio in os.listdir('audio/'):
-                subprocess.Popen([sys.executable, 'ml/audio_preprocessing.py'], audio, 'product')
-                file = 'ml/result.csv'
+                subprocess.Popen([sys.executable, 'ml/audio_preprocessing.py', audio, 'product'])
+                file = open('ml/result.csv')
 
         upload_data(file=file)
 

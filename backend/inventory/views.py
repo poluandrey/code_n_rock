@@ -1,5 +1,9 @@
 import csv
 import xlwt
+import subprocess
+import sys
+import os
+
 from rest_framework import generics
 from rest_framework import status
 from rest_framework import permissions
@@ -84,9 +88,11 @@ class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
 
     @action(detail=False, methods=['POST'])
-    def upload_data(self, request, file=None):
+    def run_model(self, request, file=None):
         if not file:
-            file = request.FILES["file"]
+            for audio in os.listdir('audio/'):
+                subprocess.Popen([sys.executable, 'ml/audio_preprocessing.py'], audio, 'product')
+                file = 'ml/result.csv'
 
         upload_data(file=file)
 
